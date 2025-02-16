@@ -13,4 +13,67 @@ body {
     background-color: #ffffff;
     box-shadow: rgba(50, 50, 80, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   }
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .headeDiv, .degree{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    
+  }
+  p {
+    margin: 5px;
+   
+  }
+  .degree {
+    font-size: 40px;
+
+  }
+  .searchBar, .searchButton {
+    border-radius: 20px;
+    border: none;
+  }
+  .searchDiv {
+    margin-top: 10px;
+  display: flex;
+  gap: 5px;
+  }
+  .searchBar {
+    color: black;
+    background-color: #ffffff;
+    height: 30px;
+    width: 200px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;  
+  outline: none;
+  }
+  .searchBar:hover {
+    background-color: #fff5ee;
+    border: none;
+  }
   
+
+  .searchButton {
+    border: none;
+    background-color: #ffffff;
+    height: 30px;
+    width: 60px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+ 
+  cursor: pointer;
+  }
+
+  .searchButton:hover {
+    background-color: #fff5ee;}
+

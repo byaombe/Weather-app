@@ -1,8 +1,8 @@
 //weather.js
 
 export class Weather {
-    constructor(apiUrl, apiKey, unitGroup="us") {
-        this.apiUrl = apiUrl;
+    constructor(apiBaseUrl, apiKey, unitGroup = "us") {
+        this.apiBaseUrl = apiBaseUrl;
         this.apiKey = apiKey;
         this.unitGroup = unitGroup;
 
@@ -10,7 +10,7 @@ export class Weather {
 
     async getWeather(city) {
         try {
-            const url = `${this.apiUrl}${city}?unitGroup=${this.unitGroup}&elements=datetime,name,temp,feelslike,humidity,precipprob,windspeed,winddir,icon&include=current,days&key=${this.apiKey}&contentType=json`;
+            const url = `${this.apiBaseUrl}${city}?unitGroup=${this.unitGroup}&elements=datetime,name,temp,feelslike,humidity,precipprob,windspeed,winddir,icon&include=current,days&key=${this.apiKey}&contentType=json`;
             const response = await fetch(url, {mode: 'cors'});
                 if (!response.ok) {
                     throw new Error(`HTTP ERROR! STATUS: ${response.status}`);
@@ -27,9 +27,8 @@ export class Weather {
             const data = await this.getWeather(city);
 
             if (data && data.currentConditions) {
-                return {
-                    Temperature: data.currentConditions.temp
-                };
+                return `${data.currentConditions.temp}°F`;
+                
             } else {
                 console.error("Temperature data not found");
                 return null;
@@ -39,6 +38,24 @@ export class Weather {
             console.error("Error fetching wind data:", error);
         }
     }
+    //asyncronous method to get entire city and state
+
+    async getLocation(city) {
+        try {
+            const data = await this.getWeather(city);
+
+            if (data ) {
+                return  data.resolvedAddress
+               
+            } else {
+                console.error("location not found");
+                return null;
+            }
+           
+        } catch (error) {
+            console.error("Error fetching location:", error);
+        }
+    }
 
     //asyncronous method to get feelsLike
     async getFeelsLike(city) {
@@ -46,10 +63,9 @@ export class Weather {
             const data = await this.getWeather(city);
 
             if (data && data.currentConditions) {
-                return {
-                    FeelsLike: data.currentConditions.feelslike,
+                return `${data.currentConditions.feelslike}°F`;
                     
-                };
+               
             } else {
                 console.error("Wind data not found");
                 return null;
@@ -66,10 +82,8 @@ export class Weather {
             const data = await this.getWeather(city);
 
             if (data && data.currentConditions) {
-                return {
-                    speed: data.currentConditions.windspeed
+                return  data.currentConditions.windspeed
                     
-                };
             } else {
                 console.error("Wind data not found");
                 return null;
@@ -86,10 +100,8 @@ export class Weather {
             const data = await this.getWeather(city);
 
             if (data && data.currentConditions) {
-                return {
-                 humidity: data.currentConditions.humidity
-                    
-                };
+                return `${data.currentConditions.humidity}%`
+         
             } else {
                 console.error("Humidity data not found");
                 return null;
@@ -106,9 +118,8 @@ export class Weather {
             const data = await this.getWeather(city);
 
             if (data && data.currentConditions) {
-                return {
-                    precipitation: data.currentConditions.precipprob
-                };
+                return  `${data.currentConditions.precipprob}%`
+                
             } else {
                 console.error("Precipitation data not found");
                 return null;
