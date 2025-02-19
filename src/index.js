@@ -25,7 +25,7 @@ const DisplayTime = (headerDiv) => {
     timeHere.textContent = time;
     
     // Get the container to update background color based on time
-    const containerDiv = document.getElementById("body");
+    const containerDiv = document.body;
     if (hours >= 6 && hours < 12) {
         containerDiv.style.backgroundColor = "#e8817f"; // Morning
     } else if (hours >= 12 && hours < 18) {
